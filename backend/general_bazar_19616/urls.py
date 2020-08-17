@@ -30,6 +30,15 @@ urlpatterns = [
     # Override email confirm to use allauth's HTML view instead of rest_auth's API view
     path("rest-auth/registration/account-confirm-email/<str:key>/", confirm_email),
     path("rest-auth/registration/", include("rest_auth.registration.urls")),
+    path("api/v1/", include("delivery_order.api.v1.urls")),
+    path("delivery_order/", include("delivery_order.urls")),
+    path("api/v1/", include("driver.api.v1.urls")),
+    path("driver/", include("driver.urls")),
+    path("home/", include("home.urls")),
+    path("api/v1/", include("menu.api.v1.urls")),
+    path("menu/", include("menu.urls")),
+    path("api/v1/", include("delivery_user_profile.api.v1.urls")),
+    path("delivery_user_profile/", include("delivery_user_profile.urls")),
 ]
 
 admin.site.site_header = "General Bazar"
@@ -44,9 +53,7 @@ api_info = openapi.Info(
 )
 
 schema_view = get_schema_view(
-    api_info,
-    public=True,
-    permission_classes=(permissions.IsAuthenticated,),
+    api_info, public=True, permission_classes=(permissions.IsAuthenticated,),
 )
 
 urlpatterns += [
